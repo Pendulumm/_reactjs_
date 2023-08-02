@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .title {
+            background-color: orange;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test"></div>
+    <div id="demo"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作dom -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 此处一定要写babel -->
+    <script type="text/babel">
+        const myId = "xXxzZ";
+        const myData = "HelLo,rEaCt";
+
+        // 1.创建虚拟dom
+        const VDOM = (
+            <div>
+                <h2 className="title" id={myId.toLowerCase()}>
+                    <span style={{ color: 'white', fontSize: '30px' }}>{myData.toLocaleLowerCase()}</span>
+                </h2>
+                <h2 className="title" id={myId.toUpperCase()}>
+                    <span style={{ color: 'white', fontSize: '30px' }}>{myData.toLocaleLowerCase()}</span>
+                </h2>
+                <input type="text" />
+            </div>
+        )
+        // 2.渲染虚拟dom到页面
+        ReactDOM.render(VDOM, document.getElementById("test"));
+    </script>
+</body>
+
+</html>

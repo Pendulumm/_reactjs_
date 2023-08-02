@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作dom -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 此处一定要写babel -->
+    <script type="text/babel">
+        // 1.创建类式组件
+        class Weather extends React.Component {
+            // 构造器调用1次
+            constructor() {
+                console.log('constructor');
+                super();
+                // 初始化状态
+                this.state = {
+                    isHot: true,
+                    wind: '微风'
+                };
+                // 解决changeWeather中this指向问题 
+                this.changeWeatherProp = this.changeWeather.bind(this);
+            }
+
+            // changeWeather 调用n次,n为点击次数
+            changeWeather() {
+                console.log('changeWeather');
+                // changeWeather放在Weather的原型对象上，供实例使用
+                // 由于changeWeather是作为onClick的回调，所以不是通过实例调用的，而是直接调用的
+                // 类中的方法默认开启了局部的严格模式，所以changeWeather中的this为undefined
+
+                // console.log(this);
+                const isHot = this.state.isHot;
+                // isHot = !isHot;  //  "isHot" is read-only
+
+                // 注意：state不可直接更改，要借助内置API更改
+                // 且更新是一种合并，不是替换
+                this.setState({
+                    isHot: !isHot
+                })
+            }
+
+            // render调用1+n次，n为状态更新的次数
+            render() {
+                console.log('render:', this);
+                // console.log(this.__proto__);
+                // 读取状态
+                const { isHot, wind } = this.state;
+                return <h1 onClick={this.changeWeatherProp}>今天天气很{isHot ? '炎热' : '凉爽'},{wind}</h1>
+                // return <h1 onClick={this.__proto__.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}</h1>
+            }
+        }
+        // 2.渲染组件到页面
+        ReactDOM.render(<Weather />, document.getElementById('test'))
+
+
+    </script>
+</body>
+
+</html>
