@@ -22,20 +22,34 @@
     <script type="text/babel">
         // 创建组件
         class Login extends React.Component {
+            // 初始化状态
+            state = {
+                username: '',
+                password: ''
+            }
 
+            // 表单提交的回调
             handleSubmit = (event) => {
                 event.preventDefault(); // 阻止表单提交
-                const { username, password } = this;
-                // console.log(username.value);
-                alert(`用户名:${username.value}, 密码:${password.value}`);
-                // debugger;
+                const { username, password } = this.state;
+                alert(`用户名:${username}, 密码:${password}`);
+            }
+            // 保存表单数据到状态中
+            saveFormData = (dataType) => {
+                // 高阶函数
+                // currying:把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。
+                return (event) => {
+                    this.setState({
+                        [dataType]: event.target.value
+                    })
+                }
             }
 
             render() {
                 return (
                     <form action="http://www.baidu.com" onSubmit={this.handleSubmit}>
-                        用户名:<input ref={c => this.username = c} type="text" name="username" />
-                        密码:<input ref={c => this.password = c} type="password" name="password" />
+                        用户名:<input onChange={this.saveFormData('username')} type="text" name="username" />
+                        密码:<input onChange={this.saveFormData('password')} type="password" name="password" />
                         <button>登录</button>
                     </form>
                 )

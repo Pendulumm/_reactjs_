@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作dom -->
+    <script src="../js/17.0.1/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../js/17.0.1/babel.min.js"></script>
+
+    <!-- 此处一定要写babel -->
+    <script type="text/babel">
+        class Count extends React.Component {
+            constructor() {
+                super();
+                console.log('Count-->constructor called');
+            }
+            // init state
+            state = {
+                sum: 0
+            }
+
+            // This method exists for rare use cases where the state depends on changes in props over time.
+            static getDerivedStateFromProps(props, state) {
+                console.log('--------------------------------');
+                console.log('Count--->getDerivedStateFromProps called');
+                // console.log('props:', props);
+                // console.log('state:', state);
+                // return props;
+                return null;
+            }
+
+            componentDidMount() {
+                console.log('Count-->componentDidMount called');
+                console.log('--------------------------------');
+            }
+            componentWillUnmount() {
+                console.log('--------------------------------');
+                console.log('Count-->componentWillUnmount called');
+                console.log('--------------------------------');
+            }
+
+            shouldComponentUpdate() {   // 控制组件更新的阀门 
+                console.log('--------------------------------');
+                console.log('Count-->shouldComponentUpdate called');
+                return true;
+            }
+            componentDidUpdate(prevProps, prevState, snapshot) {
+                console.log('--------------------------------');
+                console.log('Count-->componentDidUpdate called');
+                console.log('prevProps:', prevProps);
+                console.log('prevState:', prevState);
+                console.log('snapshot:', snapshot);
+                console.log('--------------------------------');
+            }
+
+            add = () => {
+                // get state
+                const { sum } = this.state;
+                // update state
+                this.setState({
+                    sum: sum + 1
+                })
+            }
+            unmount = () => {
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+            _forceUpdate_ = () => {
+                this.forceUpdate();
+            }
+
+            render() {
+                console.log('Count-->render called');
+                const { sum } = this.state;
+                return (
+                    <div>
+                        <h2>当前求和为:{sum}</h2>
+                        <button onClick={this.add}>点我+1</button>
+                        <button onClick={this.unmount}>unmount</button>
+                        <button onClick={this._forceUpdate_}>forceUpdate</button>
+                    </div>
+                )
+            }
+
+            getSnapshotBeforeUpdate() {
+                console.log('Count-->getSnapshotBeforeUpdate called');
+                return 'xxx';
+            }
+
+        }
+        ReactDOM.render(<Count sum={123} />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>

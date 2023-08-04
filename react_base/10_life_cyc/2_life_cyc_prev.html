@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作dom -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 此处一定要写babel -->
+    <script type="text/babel">
+        class Count extends React.Component {
+            constructor() {
+                super();
+                console.log('Count-->constructor called');
+            }
+            // init state
+            state = {
+                sum: 0
+            }
+
+            componentWillMount() {
+                console.log('Count-->componentWillMount called');
+            }
+            componentDidMount() {
+                console.log('Count-->componentDidMount called');
+                console.log('--------------------------------');
+            }
+            componentWillUnmount() {
+                console.log('--------------------------------');
+                console.log('Count-->componentWillUnmount called');
+                console.log('--------------------------------');
+            }
+
+            shouldComponentUpdate() {   // 控制组件更新的阀门 
+                console.log('--------------------------------');
+                console.log('Count-->shouldComponentUpdate called');
+                return false;
+            }
+            componentWillUpdate() {
+                console.log('Count-->componentWillUpdate called');
+            }
+            componentDidUpdate() {
+                console.log('Count-->componentDidUpdate called');
+            }
+
+            add = () => {
+                // get state
+                const { sum } = this.state;
+                // update state
+                this.setState({
+                    sum: sum + 1
+                })
+            }
+            unmount = () => {
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+            _forceUpdate_ = () => {
+                this.forceUpdate();
+            }
+
+            render() {
+                console.log('Count-->render called');
+                const { sum } = this.state;
+                return (
+                    <div>
+                        <h2>当前求和为:{sum}</h2>
+                        <button onClick={this.add}>点我+1</button>
+                        <button onClick={this.unmount}>unmount</button>
+                        <button onClick={this._forceUpdate_}>forceUpdate</button>
+                    </div>
+                )
+            }
+        }
+
+        class A extends React.Component {
+            // init state
+            state = {
+                carName: '奔驰'
+            }
+
+            changeCar = () => {
+                this.setState({
+                    carName: '奥拓'
+                })
+            }
+
+            render() {
+                console.log('A--->render called');
+                return (
+                    <div>
+                        <div>A</div>
+                        <button onClick={this.changeCar}>换车</button>
+                        <hr />
+                        <B carName={this.state.carName} />
+                    </div>
+
+                )
+            }
+        }
+        class B extends React.Component {
+            constructor(props) {
+                super(props);
+                console.log('--------------------------------------------------------');
+                console.log('B--->constructor called');
+            }
+
+            componentWillMount() {
+                console.log('B-->componentWillMount called');
+            }
+            componentDidMount() {
+                console.log('B-->componentDidMount called');
+                console.log('--------------------------------');
+            }
+            componentWillUnmount() {
+                console.log('--------------------------------');
+                console.log('B-->componentWillUnmount called');
+                console.log('--------------------------------');
+            }
+
+
+            componentWillReceiveProps(nextProps) {
+                console.log('B--->componentWillReceiveProps called');
+                // console.log('nextProps:', nextProps);
+            }
+            shouldComponentUpdate() {
+                console.log('B--->shouldComponentUpdate called');
+                return true;
+            }
+            componentWillUpdate() {
+                console.log('B-->componentWillUpdate called');
+            }
+            componentDidUpdate() {
+                console.log('B-->componentDidUpdate called');
+            }
+
+
+            render() {
+                console.log('B-->render called');
+                return (
+                    <div>
+                        <div>B</div>
+                        <div>车是:{this.props.carName}</div>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<A />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
