@@ -1,8 +1,8 @@
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import Home from './pages/Home'             // Home是路由组件
 import About from './pages/About'           // About是路由组件
-// import Test_ from './pages/Test_'
+import Test_ from './pages/Test_'
 
 import Header from './components/Header'    // Header是一般组件
 import MyNavLink from './components/MyNavLink'
@@ -35,7 +35,7 @@ function App() {
               <Switch>
                 <Route path="/about" component={About} />
                 <Route path="/home" component={Home} />
-                <Redirect to="/about" />
+                <Route path="/home" component={Test_} />
               </Switch>
             </div>
           </div>
