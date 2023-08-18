@@ -12,7 +12,7 @@ class Header extends Component {
         this.props.history.go(n)
     }
     render() {
-        // console.log('Header props:', this.props);
+        console.log('Header props:', this.props);
         return (
             <div className="page-header">
                 <h2>React Router Demo</h2>
@@ -26,5 +26,5 @@ class Header extends Component {
     }
 }
 let C = withRouter(Header)
-// console.log('C:', C);
+console.log('C:', C);
 export default C

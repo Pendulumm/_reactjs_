@@ -33,7 +33,15 @@ export default class Message extends Component {
     // push跳转，携带state参数
     this.props.history.push(`/home/message/detail`, { id, title })
   }
-
+  back = () => {
+    this.props.history.goBack()
+  }
+  forward = () => {
+    this.props.history.goForward()
+  }
+  go = (n) => {
+    this.props.history.go(n)
+  }
 
   render() {
     // console.log('Message props:', this.props);
@@ -73,7 +81,10 @@ export default class Message extends Component {
         {/* state参数 无需声明接收 */}
         <Route path="/home/message/detail" component={Detail} />
 
-
+        <button onClick={this.back}>回退</button>&nbsp;
+        <button onClick={this.forward}>前进</button>&nbsp;
+        <button onClick={() => this.go(2)}>前进2</button>&nbsp;
+        <button onClick={() => this.go(-2)}>回退2</button>
       </div>
     )
   }

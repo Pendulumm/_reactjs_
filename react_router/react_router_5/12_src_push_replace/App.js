@@ -17,7 +17,7 @@ function App() {
     <div>
       <div className="row">
         <div className="col-xs-offset-2 col-xs-8">
-          <Header />
+          <Header a={1} />
         </div>
       </div>
       <div className="row">
@@ -28,8 +28,8 @@ function App() {
             <a className="list-group-item active" href="./home.html">Home</a> */}
 
             {/* 在react中靠路由链接实现切换组件---编写路由链接 */}
-            <MyNavLink to="/about" a="1" b={2} c={3}>About</MyNavLink>
-            <MyNavLink to="/home" >Home</MyNavLink>
+            <MyNavLink replace to="/about" a="1" b={2} c={3}>About</MyNavLink>
+            <MyNavLink replace to="/home" >Home</MyNavLink>
           </div>
         </div>
         <div className="col-xs-6">

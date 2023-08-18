@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import qs from 'querystring'
+// import qs from 'querystring'
 
 const detailData = [
     { id: '01', content: 'Hi~' },
@@ -21,8 +21,8 @@ export default class Detail extends Component {
 
         // const { id, title } = this.props.match.params;       // 接收params参数
 
-        /* const { search } = this.props.location               // 接收search参数
-        const { id, title } = qs.parse(search.slice(1)) */
+        // const { search } = this.props.location               // 接收search参数
+        // const { id, title } = qs.parse(search.slice(1))
 
         const { id, title } = this.props.location.state || {}        // 接收state参数
 

@@ -33,7 +33,7 @@ export default class Message extends Component {
     // push跳转，携带state参数
     this.props.history.push(`/home/message/detail`, { id, title })
   }
-
+  
 
   render() {
     // console.log('Message props:', this.props);
@@ -73,7 +73,7 @@ export default class Message extends Component {
         {/* state参数 无需声明接收 */}
         <Route path="/home/message/detail" component={Detail} />
 
-
+        
       </div>
     )
   }
