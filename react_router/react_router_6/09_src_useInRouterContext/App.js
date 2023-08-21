@@ -12,6 +12,8 @@ function App() {
   const element = useRoutes(routes);
   // console.log('element:', element);
 
+  // console.log('App InRouterContext:', useInRouterContext());
+
   return (
     <div>
       <div className="row">
