@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        class tsStatic {
+            a = {
+                name: 'tom'
+            };
+            static b = {
+                name: 'Jerry'
+            }
+            cal() {
+                console.log('cal a>>', this.a);
+                console.log('cal b>>', this.b);
+            }
+        }
+
+        class tt extends tsStatic {
+            static b = {
+                name: 'Tom'
+            }
+            calThis() {
+                console.log('tt>>>', this);
+            }
+        }
+
+        let ins_t = new tt()
+        console.log('ins_t', ins_t);
+        console.dir(tt);
+
+
+
+
+    </script>
+</body>
+
+</html>
